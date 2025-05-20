@@ -1,0 +1,10 @@
+Dataset_2025/
+Test set/
+Dataset_2025_augmented/
+accent-gpu/
+mel_specs_augmented/
+mel_specs/
+best_model.pt
+best_model_b3.pt
+best_model_b2.pt
+best_model_b.pt

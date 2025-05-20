@@ -1,0 +1,6 @@
+results:
+
+model a test: 0.673
+b: 0.960
+b2: 0.967
+b3:0.961
