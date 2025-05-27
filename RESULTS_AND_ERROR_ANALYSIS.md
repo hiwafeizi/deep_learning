@@ -201,24 +201,36 @@ Precision 96.8% 96.5% 96.1% 98.0% 95.1%
 
 ```mermaid
 graph TD
-    A[Base Model<br/>58.3% Accuracy] --> B[+ Batch Normalization<br/>66.5% (+8.2%)]
-    B --> C[+ Dropout 0.3<br/>69.6% (+3.1%)]
-    C --> D[+ Weight Decay<br/>71.9% (+2.3%)]
-    D --> E[+ Early Stopping<br/>73.7% (+1.8%)]
-    E --> F[+ Data Augmentation<br/>86.1% (+12.4%)]
-    F --> G[Final Model B2<br/>96.7% (+10.6%)]
+    A["Base Model<br/>58.3% Accuracy"] --> B["+ Batch Normalization<br/>66.5% (+8.2%)"]
+    B --> C["+ Dropout 0.3<br/>69.6% (+3.1%)"]
+    C --> D["+ Weight Decay<br/>71.9% (+2.3%)"]
+    D --> E["+ Early Stopping<br/>73.7% (+1.8%)"]
+    E --> F["+ Data Augmentation<br/>86.1% (+12.4%)"]
+    F --> G["Final Model B2<br/>96.7% (+10.6%)"]
     
     style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px
     style G fill:#ccffcc,stroke:#00ff00,stroke-width:2px
     style F fill:#ffffcc,stroke:#ffaa00,stroke-width:2px
     
-    H[Regularization Impact Analysis]
-    H --> I[Batch Norm: Stabilizes training]
-    H --> J[Dropout: Reduces overfitting]
-    H --> K[Weight Decay: Prevents large weights]
-    H --> L[Early Stopping: Optimal convergence]
-    H --> M[Data Aug: Improves generalization]
+    H["Regularization Impact Analysis"]
+    H --> I["Batch Norm: Stabilizes training"]
+    H --> J["Dropout: Reduces overfitting"]
+    H --> K["Weight Decay: Prevents large weights"]
+    H --> L["Early Stopping: Optimal convergence"]
+    H --> M["Data Aug: Improves generalization"]
 ```
+
+### Regularization Progression Analysis
+
+| Stage | Configuration | Accuracy (%) | Improvement | Cumulative Gain |
+|-------|---------------|--------------|-------------|-----------------|
+| **Base** | No regularization | 58.3% | - | - |
+| **+BatchNorm** | + Batch Normalization | 66.5% | +8.2% | +8.2% |
+| **+Dropout** | + Dropout (0.3) | 69.6% | +3.1% | +11.3% |
+| **+Weight-decay** | + Weight Decay | 71.9% | +2.3% | +13.6% |
+| **+Early-stop** | + Early Stopping | 73.7% | +1.8% | +15.4% |
+| **+Augment** | + Data Augmentation | 86.1% | +12.4% | +27.8% |
+| **Final** | Model B2 (Optimized) | 96.7% | +10.6% | +38.4% |
 
 ### Ablation Study Results
 
@@ -427,114 +439,6 @@ All performance improvements were validated using rigorous statistical methods:
 - **Model B vs Model A**: W = 2,847, p < 0.001
 - **Model B2 vs Model B**: W = 1,234, p < 0.01
 - **Model B3 vs Model B**: W = 567, p = 0.08
-
----
-
-## Limitations and Future Work
-
-### Current System Limitations
-
-#### Technical Constraints
-1. **Fixed Duration Requirement**: 7-second audio constraint limits real-world applicability
-   - Impact: Cannot process variable-length speech samples
-   - Solution: Implement attention-based variable-length processing
-
-2. **Limited Accent Diversity**: Only 5 accent classes may not represent global linguistic diversity
-   - Impact: Reduced generalizability to unseen accents
-   - Solution: Expand dataset to include more accent varieties
-
-3. **Computational Requirements**: GPU dependency for reasonable training times
-   - Impact: Limits accessibility for resource-constrained environments
-   - Solution: Model compression and quantization techniques
-
-4. **Preprocessing Dependency**: Model B series requires consistent spectrogram generation
-   - Impact: Additional computational overhead in deployment
-   - Solution: End-to-end learnable feature extraction
-
-#### Methodological Limitations
-1. **Binary Gender Classification**: Oversimplified gender representation
-2. **Monolingual Focus**: Limited to English accent classification
-3. **Static Model Architecture**: No adaptive capacity for new accents
-4. **Limited Evaluation Metrics**: Focus on accuracy without fairness metrics
-
-### Recommended Future Improvements
-
-#### Short-term Enhancements (3-6 months)
-1. **Variable Length Processing**: 
-   - Implement attention mechanisms for variable-duration audio
-   - Use sequence-to-sequence architectures
-   - Expected improvement: +5-8% accuracy on real-world data
-
-2. **Transfer Learning Integration**:
-   - Leverage pre-trained audio models (Wav2Vec2, Whisper)
-   - Fine-tune on accent classification task
-   - Expected improvement: +3-5% accuracy with reduced training time
-
-3. **Ensemble Methods**:
-   - Combine multiple model predictions
-   - Implement voting and stacking strategies
-   - Expected improvement: +2-3% accuracy with improved robustness
-
-#### Medium-term Developments (6-12 months)
-1. **Real-time Processing Optimization**:
-   - Optimize for streaming audio classification
-   - Implement sliding window approaches
-   - Target: <100ms latency for real-time applications
-
-2. **Multilingual Extension**:
-   - Expand to include multiple languages
-   - Cross-lingual accent classification
-   - Target: 15+ languages with 20+ accent varieties
-
-3. **Fairness and Bias Mitigation**:
-   - Implement fairness-aware training
-   - Address demographic biases
-   - Ensure equitable performance across groups
-
-#### Long-term Research Directions (1-2 years)
-1. **Adaptive Learning Systems**:
-   - Online learning for new accent adaptation
-   - Few-shot learning for rare accents
-   - Continual learning without catastrophic forgetting
-
-2. **Multimodal Integration**:
-   - Combine audio with visual speech features
-   - Leverage text transcriptions when available
-   - Explore cross-modal learning approaches
-
-3. **Explainable AI Integration**:
-   - Implement attention visualization
-   - Provide linguistic explanations for predictions
-   - Enable interpretable accent classification
-
-### Research Impact and Applications
-
-#### Academic Contributions
-- Novel comparison of raw waveform vs. spectrogram approaches
-- Comprehensive regularization technique analysis
-- Gender bias identification and mitigation strategies
-- Statistical validation methodology for audio classification
-
-#### Practical Applications
-- **Language Learning**: Accent assessment and feedback systems
-- **Speech Recognition**: Accent-aware ASR systems
-- **Telecommunications**: Accent-based call routing
-- **Accessibility**: Improved speech interfaces for diverse populations
-
----
-
-## Conclusion
-
-This comprehensive analysis demonstrates the superior performance of spectrogram-based CNN architectures over raw waveform approaches for accent classification. The 29.4% accuracy improvement achieved by Model B2 (96.7%) compared to Model A (67.3%) highlights the importance of appropriate feature representation in audio classification tasks.
-
-Key findings include:
-1. **Spectrogram preprocessing** significantly improves both accuracy and computational efficiency
-2. **Regularization techniques** provide cumulative benefits, with data augmentation showing the largest impact (+12.4%)
-3. **Gender bias** is substantially reduced in spectrogram-based models
-4. **Statistical significance** validates all major performance improvements
-5. **Computational efficiency** favors spectrogram approaches for practical deployment
-
-The analysis provides a solid foundation for future research in accent classification and demonstrates the potential for real-world applications in language learning, speech recognition, and accessibility technologies.
 
 ---
 
