@@ -426,7 +426,3 @@ All performance improvements were validated using rigorous statistical methods:
 - **Model B3 vs Model B**: W = 567, p = 0.08
 
 ---
-
-*Document prepared by: Results & Error Analysis Team*  
-*Last updated: [Current Date]*  
-*Version: 1.0* 
