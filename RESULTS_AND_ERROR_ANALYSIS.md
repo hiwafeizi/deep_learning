@@ -197,23 +197,8 @@ Precision 96.8% 96.5% 96.1% 98.0% 95.1%
 | **Early Stopping** | Patience=5 | Patience=16 | Patience=16 | Patience=16 | Prevent overfitting | +1.8% validation |
 | **Data Augmentation** | ✓ | ✓ | ✓ | ✓ | Synthetic data generation | +12.4% robustness |
 
-### Regularization Effectiveness Visualization
+### Regularization Impact Summary
 
-```mermaid
-flowchart TD
-    A["Base Model<br/>58.3% Accuracy"] --> B["+ Batch Normalization<br/>66.5% (+8.2%)"]
-    B --> C["+ Dropout 0.3<br/>69.6% (+3.1%)"]
-    C --> D["+ Weight Decay<br/>71.9% (+2.3%)"]
-    D --> E["+ Early Stopping<br/>73.7% (+1.8%)"]
-    E --> F["+ Data Augmentation<br/>86.1% (+12.4%)"]
-    F --> G["Final Model B2<br/>96.7% (+10.6%)"]
-    
-    style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px
-    style G fill:#ccffcc,stroke:#00ff00,stroke-width:2px
-    style F fill:#ffffcc,stroke:#ffaa00,stroke-width:2px
-```
-
-**Regularization Impact Summary:**
 - **Batch Normalization**: Stabilizes training and reduces internal covariate shift
 - **Dropout**: Reduces overfitting by randomly deactivating neurons during training
 - **Weight Decay**: Prevents large weights through L2 regularization
