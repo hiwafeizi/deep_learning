@@ -200,7 +200,7 @@ Precision 96.8% 96.5% 96.1% 98.0% 95.1%
 ### Regularization Effectiveness Visualization
 
 ```mermaid
-graph TD
+flowchart TD
     A["Base Model<br/>58.3% Accuracy"] --> B["+ Batch Normalization<br/>66.5% (+8.2%)"]
     B --> C["+ Dropout 0.3<br/>69.6% (+3.1%)"]
     C --> D["+ Weight Decay<br/>71.9% (+2.3%)"]
@@ -211,14 +211,14 @@ graph TD
     style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px
     style G fill:#ccffcc,stroke:#00ff00,stroke-width:2px
     style F fill:#ffffcc,stroke:#ffaa00,stroke-width:2px
-    
-    H["Regularization Impact Analysis"]
-    H --> I["Batch Norm: Stabilizes training"]
-    H --> J["Dropout: Reduces overfitting"]
-    H --> K["Weight Decay: Prevents large weights"]
-    H --> L["Early Stopping: Optimal convergence"]
-    H --> M["Data Aug: Improves generalization"]
 ```
+
+**Regularization Impact Summary:**
+- **Batch Normalization**: Stabilizes training and reduces internal covariate shift
+- **Dropout**: Reduces overfitting by randomly deactivating neurons during training
+- **Weight Decay**: Prevents large weights through L2 regularization
+- **Early Stopping**: Finds optimal convergence point to prevent overfitting
+- **Data Augmentation**: Improves generalization through synthetic data generation
 
 ### Regularization Progression Analysis
 
